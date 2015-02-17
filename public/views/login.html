@@ -1,0 +1,142 @@
+<div class="row">
+  <div class="col-md-9 col-md-push-3">.col-md-9 .col-md-push-3</div>
+  <div class="col-md-3 col-md-pull-9">.col-md-3 .col-md-pull-9</div>
+</div>
+<div class="row" style="margin-top: 5%;">
+  <div class="jumbotron text-center col-md-6 col-md-offset-3 widget-container" data-ng-hide="loginFlag">
+          <form class="login form-horizontal">
+                <div class="form-group">
+                   <span data-ng-bind="message" style="color: tomato;"></span>
+                </div>
+                  <div class="form-group">
+                     <!--  <label for="inputEmail" class="col-sm-2 control-label">Email</label> -->
+                      <div class="col-sm-12">
+                          <input type="email" name="login" id="login"  class="form-control" data-ng-model="login.email" placeholder="Email">
+                      </div>    
+                  </div>
+                   <div class="form-group">
+                     <!--  <label for="inputPhone" class="col-sm-2 control-label">Phone</label> -->
+                      <div class="col-sm-12">
+                           <input type="text" name="phone" id="phone" class="form-control" data-ng-model="login.phone"  data-ng-bind="login.phone | tel"  placeholder="Phone" >
+                            Result formatted: {{ login.phone | tel }}
+                      </div>     
+                  </div>
+              
+                  <div class="form-group">
+                      <!-- <label for="inputPassword" class="col-sm-2 control-label">Password:</label> -->
+                      <div class="col-sm-12">
+                          <input type="password" name="password" id="password" class="form-control" data-ng-model="login.password" placeholder="Password" required>
+                      </div>    
+                  </div>
+                  <div class="form-group">
+                       <button type="submit" class="login-button btn-primary " data-ng-click="loginCheck(login)">Login</button>
+                  </div>
+                 <!--   <div class="alert alert-danger" role="alert" data-ng-show="!message.length" data-ng-bind="message" >
+                   
+                  </div> -->
+            </form>
+  </div> 
+ </div> 
+<!--  <form class="form-signin   text-center jumbotron">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form> -->
+
+   
+
+
+
+<!-- end loginFlag -->
+<!-- <div data-ng-show="loginFlag">
+       <div data-ng-show="hideUserInfo">
+          <div data-ng-show="createUserFlag">
+               <table class="table ">
+                   <thead>
+                     <tr>
+                         <td> Id</td> 
+                         <td> Email</td>
+                        <!- <td>Password</td>
+                         <td>name</td>
+                         <td>Phone</td>
+                         <td>Created</td>
+                         <td>updated</td>
+                         <td>Last login</td>
+                         <td>Role</td>
+                         <td>Confirmed</td>
+                         <td>Admin</td>
+                         <td>Docs</td>
+                         <td>Edit</td>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr data-ng-repeat="user in users">
+                      <td data-ng-bind="user.id">    </td>
+                     <td data-ng-bind="user.email"> </td>
+                  <!-   <td> <%#=user["password"] %> </td> 
+                     <td data-ng-bind="user.name"> </td>
+                     <td data-ng-bind="user.phone"> </td>
+                     <td data-ng-bind="user.created"> </td>
+                     <td data-ng-bind="user.updated"> </td>
+                     <td data-ng-bind="user.lastLogin"> </td>
+                     <td data-ng-bind="user.role"> </td>
+                     <td data-ng-bind="user.confirmed"> </td>
+                     <td data-ng-bind="user.admin"> </td>
+                     <td><button data-ng-click="getDocs(user.id)">Docs</button></td>
+                     <td><button data-ng-click="creteUser(user)">Edit</button></td>
+                   </tr>
+                       </tbody>
+              </table>
+              <div class="pagination">
+                  <button data-ng-click="nextPage(currentPage-1)">Pre</button>
+                 <button data-ng-click="nextPage(currentPage+1)">Next</button>
+                 <button data-ng-click="creteUser(sampleUser)">New User</button>
+              </div>
+                     
+        </div>
+        <div data-ng-hide="createUserFlag">
+             <form class="login">
+              <div class="form-group">
+                 <span data-ng-bind="message"></span>
+                  <button data-ng-click="nextPage(currentPage)">Pre</button>
+              </p>
+               <div class="form-group">
+                    <input type="text" name="id" id="id" data-ng-model="sampleUser.id" placeholder="Name">
+                </p>
+               <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" data-ng-model="sampleUser.name" placeholder="Name">
+                </p>
+                <div class="form-group">
+                    <label for="login">Email</label>
+                    <input type="email" name="login" id="login" data-ng-model="sampleUser.email" placeholder="Email">
+                </p>
+                 <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="phone" name="phone" id="phone" data-ng-model="sampleUser.phone" placeholder="Phone" >
+                </p>
+            
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" data-ng-model="sampleUser.password" placeholder="Password" required>
+                </p>
+                <p class="login-submit">
+                    <button type="submit" class="login-button" data-ng-click="updateUser(sampleUser)">Submit</button>
+                </p>
+          </form>
+        </div>    
+     </div> 
+       <div data-ng-hide="hideUserInfo">
+           <button data-ng-click="nextPage(currentPage)">Back</button>
+             <! <p data-ng-bind="docLists"></p> 
+              <ul data-ng-repeat="doc in docLists">
+                  <li><img ng-src="{{'http://sobre.volsted.com/be/doc/get?auth='+auth+'&id='+doc.id}}"
+                    width="200" height="200"/>   </li>
+               </ul> 
+
+       </div> 
+</div>
+ -->

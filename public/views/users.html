@@ -1,0 +1,103 @@
+<div class="row" style="margin-top: 5%;" data-ng-show="userFlag">
+<div data-ng-show="!docFlag">
+<table class="table " >
+      <thead>
+          <tr>
+              <td> Id</td> 
+              <td> Email</td>
+              <td>name</td>
+              <td>Phone</td>
+              <td>Created</td>
+               <td>updated</td>
+               <td>Last login</td>
+                         <td>Role</td>
+                         <td>Confirmed</td>
+                         <td>Admin</td>
+                         <td>Docs</td>
+                         <td>Edit</td>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr data-ng-repeat="user in users">
+                     <td data-ng-bind="user.id">    </td>
+                     <td data-ng-bind="user.email"> </td>
+                     <td data-ng-bind="user.name"> </td>
+                     <td data-ng-bind="user.phone"> </td>
+                     <td data-ng-bind="user.created"> </td>
+                     <td data-ng-bind="user.updated"> </td>
+                     <td data-ng-bind="user.lastLogin"> </td>
+                     <td data-ng-bind="user.role"> </td>
+                     <td data-ng-bind="user.confirmed"> </td>
+                     <td data-ng-bind="user.admin"> </td>
+                     <td><button data-ng-click="getDocs(user.id)">Docs</button></td>
+                     <td><button data-ng-click="createUser(user)">Edit</button></td>
+                   </tr>
+                  </tbody>
+              </table>
+    <div class="pagination">
+     <button data-ng-click="getUsers(page-1,pageSize)">Pre</button>
+     <button data-ng-click="getUsers(page+1,pageSize)">Next</button>
+     <button data-ng-click="createUser(sampleUser)">New User</button>
+    <button data-ng-click="logout()">Log out</button>
+     </div>
+  </div>   
+   <div data-ng-show="docFlag">
+           <button data-ng-click="getUsers(page,pageSize)">Back</button>
+               <ul data-ng-repeat="doc in docLists" style="list-style: none;">
+                  <li>
+                   <!--  <img ng-src="{{'http://sobre.volsted.com/be/doc/thumbnail?auth='+auth+'&id='+doc.id+'&owner='+owner}}"   /> 
+-->                     
+ <img ng-src="{{'http://sobre.volsted.com/be/doc/get?auth='+auth+'&id='+doc.id}}"   /> 
+                          
+                     </li>
+              </ul> 
+</div> 
+
+
+
+</div>
+<div class="jumbotron text-center col-md-6 col-md-offset-3 widget-container" data-ng-show="!userFlag"  style="margin-top: 5%;">
+    <button data-ng-click="getUsers(page,pageSize)">Back</button>
+          <form class="login form-horizontal">     
+               <div class="form-group">
+                   <span data-ng-bind="message" style="color: tomato;"></span>
+                                  </div>
+                <div class="form-group">
+                    <input type="hidden" name="id" id="id" data-ng-model="sampleUser.id" placeholder="id">
+                </p>
+               <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" data-ng-model="sampleUser.name" placeholder="Name">
+                </p>
+                <div class="form-group">
+                    <label for="login">Email</label>
+                    <input type="email" name="login" id="login" data-ng-model="sampleUser.email" placeholder="Email">
+                </p>
+                 <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="phone" name="phone" id="phone" data-ng-model="sampleUser.phone" placeholder="Phone" >
+                </p>
+            
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <input type="role" name="role" id="role" data-ng-model="sampleUser.role" placeholder="Role" >
+                </p>
+               <div class="form-group">
+                    <label for="role">Password</label>
+                    <input type="password" name="password" id="passwrod" data-ng-model="sampleUser.password" placeholder="Password" >
+                </p>
+                <p class="login-submit">
+                    <button type="submit" class="login-button" data-ng-click="updateUser(sampleUser)">Submit</button>
+                </p>
+     </form>
+ </div>         
+<!---- doc list -->
+
+ 
+
+
+
+
+
+
+

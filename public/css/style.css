@@ -1,0 +1,9 @@
+body { padding-top:30px; }
+.widget-container{
+  border:1px solid #DFDFDF;
+border-radius:10px;
+-webkit-box-shadow: 3px 4px 5px rgba(50, 50, 50, 0.2);
+-moz-box-shadow: 3px 4px 5px rgba(50, 50, 50, 0.2);
+box-shadow: 3px 4px 5px rgba(50, 50, 50, 0.2);
+
+}
