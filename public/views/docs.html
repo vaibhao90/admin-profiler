@@ -1,0 +1,12 @@
+<!--  <button data-ng-click="getUsers(page,pageSize)">Back</button>
+ -->
+
+<div style="margin-top: 37px;margin-bottom: 10px;">
+ <a class="btn btn-primary" href="/#/admin/users/"> Back </a>
+</div>
+ <div class="row">
+	  <div class="col-md-6"   data-ng-repeat="doc in docLists" >
+	        <img ng-src="{{'http://sobre.volsted.com/be/doc/get?auth='+auth+'&id='+doc.id}}"  class="img-rounded img-responsive" alt="Cinque Terre" height="300" style="margin-bottom: 5px;">
+	  </div>
+	  
+</div>

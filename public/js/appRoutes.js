@@ -12,6 +12,13 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 		 	templateUrl: 'views/users.html',
 			controller: 'UserController'
 		 })
+         // docs page
+		 .when('/admin/docs/:owner', {
+		 	templateUrl: 'views/docs.html',
+			controller: 'DocController'
+		 })
+
+
       ;
 
 	$locationProvider.html5Mode(true);

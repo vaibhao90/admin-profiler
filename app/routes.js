@@ -12,23 +12,28 @@ module.exports = function(app) {
 	app.get('/be/user/login', function(req, res) {
 		var Client = require('node-rest-client').Client;
 
-        console.log(req);
+        //console.log(req);
 		var client = new Client();
          var result = {};
-         console.log(req);
+       //  console.log(req);
 		// set content-type header and data as json in args parameter
 		var args = {
 		  data: { email: req.email,password: req.password },
 		  headers:{"Content-Type": "application/json"} 
 		};
-
-		client.get("http://sobre.volsted.com/be/user/login?email="+req.query.email+"&password="+req.query.password, args, function(data,response) {
+        var parameters = "";
+        if(req.query.email)  parameters = "email="+req.query.email;
+        if(req.query.phone)  parameters = parameters+"&phone="+req.query.phone; 
+        if(req.query.password)  parameters = parameters+"&password="+req.query.password; 
+        console.log(parameters);
+		client.get("http://sobre.volsted.com/be/user/login?"+parameters, args, function(data,response) {
+		//client.post("http://sobre.volsted.com/be/user/login",req.query, function(data,response) {	
 		      // parsed response body as js object
-		    console.log(data);
+		   // console.log(data);
 		    result = data;
 		    res.json(data);
 		    // raw response
-		    console.log(response);
+		   // console.log(response);
 		}); 
 		
 	});	    
@@ -82,7 +87,7 @@ module.exports = function(app) {
 		
 	});	    
 
-  app.get('/be/users/docs', function(req, res) {
+  app.get('/be/doc/list', function(req, res) {
 		var Client = require('node-rest-client').Client;
        // console.log(req);
 		var client = new Client();
@@ -93,7 +98,7 @@ module.exports = function(app) {
        
         var user = req.query ;
         
-		client.get("http://sobre.volsted.com/be/doc/list?auth="+user.auth+"&owner="+user.id, function(data,response) {
+		client.get("http://sobre.volsted.com/be/doc/list?auth="+user.auth+"&owner="+user.owner, function(data,response) {
 		      // parsed response body as js object
 		    console.log(data);
 		    result = data;
