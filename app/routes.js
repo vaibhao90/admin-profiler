@@ -75,7 +75,7 @@ module.exports = function(app) {
         console.log(req.query);
         console.log("#################");
 		///client.get("http://sobre.volsted.com/be/user/update?auth="+req.query.auth+"&id="+user.id+"&name"+user.name+"&email="+user.email+"&phone="+user.phone+"&password="+user.password+"&role="+user.role, args, function(data,response) {
-	    client.get("http://sobre.volsted.com/be/user/update?auth="+req.query.auth+"&id="+user.id+"&role="+user.role, args, function(data,response) {
+	    client.get("http://sobre.volsted.com/be/user/update?auth="+req.query.auth+"&id="+user.id+"&role="+user.role+"&phone="+user.phone, args, function(data,response) {
 		      // parsed response body as js object
 		    console.log(data);
 		    result = data;

@@ -27,7 +27,6 @@ sobreService.service('LoginService', [ '$q', '$http',function($q,$http) {
             var promise = deferred.promise;
             var sub_url =  'be/user/login';
             var queryString = "";
-            console.log(parameters);
             if(parameters.email){
               queryString = "email="+parameters.email;
             }
@@ -39,8 +38,11 @@ sobreService.service('LoginService', [ '$q', '$http',function($q,$http) {
               queryString= queryString+"&password="+parameters.password;
             }
        
-           var url = src+sub_url+"?"+queryString;
-                   
+           //var url = src+sub_url+"?"+queryString;
+           var url = src+sub_url+"?"+escape(queryString);
+           //var url = encodeURI(uri);  
+           console.log(url);
+            
            $http.get(url)
             .success(function(response){
                 console.log(response);
@@ -153,8 +155,8 @@ sobreService.service('UserService', [ '$q', '$http',function($q,$http) {
             // }
        
        
-           var url = src+sub_url+"?"+queryString;
-                   
+           var uri = src+sub_url+"?"+queryString;
+           var url = encodeURI(uri);        
            $http.get(url)
             .success(function(response){
                 console.log(response);
@@ -211,8 +213,9 @@ sobreService.service('UserService', [ '$q', '$http',function($q,$http) {
              }
        
        
-           var url = src+sub_url+"?"+queryString;
-                   
+           //var url = src+sub_url+"?"+queryString;
+           var uri = src+sub_url+"?"+queryString;
+           var url = encodeURI(uri);             
            $http.get(url)
             .success(function(response){
                 console.log(response);
