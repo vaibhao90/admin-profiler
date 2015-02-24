@@ -15,7 +15,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
          // docs page
 		 .when('/admin/docs/:owner', {
 		 	templateUrl: 'views/docs.html',
-			controller: 'DocController'
+			controller: 'DocControlle`r'
 		 })
 
 

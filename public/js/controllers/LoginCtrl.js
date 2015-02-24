@@ -69,7 +69,7 @@ sobreApp.controller('LoginController', function($scope,$http,$cookies,$location,
                          $scope.auth = response.auth;
                          $localstorage.set("auth",response.auth);
                          $cookies.auth = response.auth;
-                          $location.path('/admin/users');
+                         $location.path('/admin/users');
                } 
               
           }).error(function(response) {
@@ -110,20 +110,21 @@ sobreApp.controller('UserController', function($scope,$http,$location,$localstor
                        $scope.pageSize = response.data.page.size;
                        $scope.lastPageFlag = response.data.page.last;
                        $scope.lastPageNum = response.data.page.totalPages;
+                       $scope.auth = response.auth;
+                       $localstorage.set("auth",response.auth); 
              } 
            
         }).error(function(response) {
             console.log("here is error");
-            if(response.message=="Must be logged in"){
-                 $scope.message = response.message;
-                $scope.logout();
-            }
+            if (response.message.indexOf("expired authorization token")!=-1) $scope.logout();
+
            //
         });
 
    };
     $scope.getUsers($scope.page,$scope.pageSize);
     $scope.createUser = function(user){
+           $scope.message = "";
            if($scope.userFlag) $scope.userFlag = false;
            $scope.sampleUser =  user;
     };
@@ -135,10 +136,14 @@ sobreApp.controller('UserController', function($scope,$http,$location,$localstor
        
             if(response.status==="OK"){
                         $scope.sampleUser = {};
-                         $scope.getUsers($scope.page,$scope.pageSize);
+                        $scope.auth = response.auth;
+                         $localstorage.set("auth",response.auth);
+                        $scope.getUsers($scope.page,$scope.pageSize);
+
              } 
            }).error(function(response) {
                $scope.message = response.message;
+               if (response.message.indexOf("expired authorization token")!=-1) $scope.logout();
            });
       }else{
                 UserService.createUser($scope.api_url,$scope.auth,user,false)
@@ -150,6 +155,7 @@ sobreApp.controller('UserController', function($scope,$http,$location,$localstor
              } 
            }).error(function(response) {
                 $scope.message = response.message;
+                 if (response.message.indexOf("expired authorization token")!=-1) $scope.logout();
            });
 
       }
@@ -189,10 +195,12 @@ sobreApp.controller('DocController', function($scope,$routeParams,$http,$locatio
                 .success(function(response) {
            
                 if(response.status==="OK"){
-                            $scope.sampleUser = {};
-                            console.log(response); 
-                           $scope.owner = owner;
-                            $scope.docLists = response.data.documents; 
+                             $scope.sampleUser = {};
+                             console.log(response); 
+                             $scope.auth = response.auth;
+                             $localstorage.set("auth",response.auth); 
+                             $scope.owner = owner;
+                             $scope.docLists = response.data.documents; 
                              $scope.docFlag = true;  
                      //   $scope.getUsers($scope.page,$scope.pageSize);
                  } 

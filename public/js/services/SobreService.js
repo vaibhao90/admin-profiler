@@ -32,14 +32,14 @@ sobreService.service('LoginService', [ '$q', '$http',function($q,$http) {
             }
             if(parameters.phone){
               var separater = parameters.email ? "&" : "";
-              queryString =queryString+separater+"&phone="+parameters.phone;
+              queryString =queryString+separater+"&phone="+encodeURIComponent(parameters.phone);
             }
             if(parameters.password){
               queryString= queryString+"&password="+parameters.password;
             }
        
-           //var url = src+sub_url+"?"+queryString;
-           var url = src+sub_url+"?"+escape(queryString);
+           var url = src+sub_url+"?"+queryString;
+           //var url = src+sub_url+"?"+escape(queryString);
            //var url = encodeURI(uri);  
            console.log(url);
             
@@ -139,7 +139,7 @@ sobreService.service('UserService', [ '$q', '$http',function($q,$http) {
 
              if(parameters.phone){
                 var separater = parameters.email ? "&" : "";
-              queryString =queryString+separater+"&phone="+parameters.phone;
+              queryString =queryString+separater+"&phone="+encodeURIComponent(parameters.phone);
              }
             
              
