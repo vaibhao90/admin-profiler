@@ -2,14 +2,14 @@
     <div data-ng-show="!docFlag">
         <div class="pagination">
              <button data-ng-click="getUsers(0,pageSize)">First</button>
-             <button data-ng-click="getUsers(page-1,pageSize)">Prev</button>
+             <button data-ng-hide="page==0"   data-ng-click="getUsers(page-1,pageSize)">Prev</button>
              <button data-ng-click="getUsers(page+1,pageSize)" data-ng-hide="lastPageFlag" >Next</button>
              <button data-ng-click="getUsers(lastPageNum-1,pageSize)">Last</button>
               
           </div>
           <div class="pull-right">
-             <button data-ng-click="createUser(sampleUser)">New User</button>
-             <button data-ng-click="logout()">Log out</button>
+<!--              <button data-ng-click="createUser(sampleUser)">New User</button>
+ -->             <button data-ng-click="logout()">Log out</button>
           </div>   
           <table class="table " >
                 <thead>
