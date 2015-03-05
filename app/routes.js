@@ -1,4 +1,7 @@
-//var Client = require('node-rest-client').Client;
+var Client = require('node-rest-client').Client;
+var httpProxy = require('http-proxy');
+
+var  request = require('request');
 module.exports = function(app) {
 
 	// server routes ===========================================================
@@ -9,28 +12,30 @@ module.exports = function(app) {
 	// route to handle all angular requests
  
 
-	app.get('/be/user/login', function(req, res) {
+	//app.get('/be/user/login', function(req, res) {
+	app.post('/be/user/login', function(req, res) {	
 		var Client = require('node-rest-client').Client;
 
         //console.log(req);
 		var client = new Client();
          var result = {};
-        console.log(req.query);
+        console.log(req.body);
 		// set content-type header and data as json in args parameter
-		var args = {
-		  data: req.query,
-		  headers:{"Content-Type": "application/x-www-form-urlencoded"} 
-		};
-         var parameters = "";
-        if(req.query.email)  parameters = "email="+req.query.email;
-        if(req.query.phone)  parameters = "phone="+req.query.phone; 
-        if(req.query.password)  parameters = parameters+"&password="+req.query.password; 
-        console.log(parameters);
-		client.get("http://sobre.volsted.com/be/user/login?"+parameters, function(data,response) {
+		// var args = {
+		//   data: req.body,
+		//   headers:{"Content-Type": "application/x-www-form-urlencoded"} ,
+		//   parameters: req.body
+		// };
+        // var parameters = "";
+        // if(req.query.email)  parameters = "email="+req.query.email;
+        // if(req.query.phone)  parameters = "phone="+req.query.phone; 
+        // if(req.query.password)  parameters = parameters+"&password="+req.query.password; 
+       // console.log(args);
+		client.post("http://sobre.volsted.com/be/user/login",req.body, function(data,response) {
 	//console.log(req.body);		
 	 	//client.get("http://sobre.volsted.com/be/user/login",args, function(data,response) {	
 		      // parsed response body as js object
-		   console.log(response);
+		   //console.log(response);
 		    result = data;
 		    res.json(data);
 		    // raw response
@@ -66,20 +71,20 @@ module.exports = function(app) {
         console.log(req);
 		var client = new Client();
         var result = {};
-        var args = {
-           data:	req.body,
-		   headers:{"Content-Type": "application/json"} 
-		};
-         //console.log("Request aa gayi");
-        //console.log(req.query.user);
-          var user = req.body ;
-       //  console.log("#################");
-        console.log(req.body);
-    //    console.log("#################");
-        user.phone = encodeURIComponent(user.phone);
+  //       var args = {
+  //          data:	req.body,
+		//    headers:{"Content-Type": "application/json"} 
+		// };
+  //        //console.log("Request aa gayi");
+  //       //console.log(req.query.user);
+  //         var user = req.body ;
+  //      //  console.log("#################");
+  //       console.log(req.body);
+  //   //    console.log("#################");
+  //       user.phone = encodeURIComponent(user.phone);
 
-		client.get("http://sobre.volsted.com/be/user/update?auth="+req.body.auth+"&id="+user.id+"&name"+user.name+"&email="+user.email+"&phone="+user.phone+"&password="+user.password+"&role="+user.role, args, function(data,response) {
-	    //client.post("http://sobre.volsted.com/be/user/update",args, function(data,response) {
+		//client.get("http://sobre.volsted.com/be/user/update?auth="+req.body.auth+"&id="+user.id+"&name"+user.name+"&email="+user.email+"&phone="+user.phone+"&password="+user.password+"&role="+user.role, args, function(data,response) {
+	    client.post("http://sobre.volsted.com/be/user/update",req.body, function(data,response) {
 		      // parsed response body as js object
 		    //console.log(data);
 		    result = data;

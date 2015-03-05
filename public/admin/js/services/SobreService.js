@@ -33,23 +33,24 @@ sobreService.service('LoginService', [ '$q', '$http',function($q,$http) {
                  headers: {
                    'Content-Type': 'application/x-www-form-urlencoded'
                  },
-                 data: parameters,
+                data: parameters,
+                parameters: parameters 
                 };
             
-         //$http(req)
-           if(parameters.email){
-              queryString = "email="+parameters.email;
-            }
-            if(parameters.phone){
-              var separater = parameters.email ? "&" : "";
-              queryString =queryString+separater+"&phone="+encodeURIComponent(parameters.phone);
-            }
-            if(parameters.password){
-              queryString= queryString+"&password="+parameters.password;
-            }
+         // //$http(req)
+         //   if(parameters.email){
+         //      queryString = "email="+parameters.email;
+         //    }
+         //    if(parameters.phone){
+         //      var separater = parameters.email ? "&" : "";
+         //      queryString =queryString+separater+"&phone="+encodeURIComponent(parameters.phone);
+         //    }
+         //    if(parameters.password){
+         //      queryString= queryString+"&password="+parameters.password;
+         //    }
        
-           var url = src+sub_url+"?"+queryString;
-           $http.get(url)
+         //   var url = src+sub_url+"?"+queryString;
+           $http.post(sub_url,req)
             .success(function(response){
                 console.log(response);
                 if(response.status === 'ERROR'){
@@ -141,8 +142,17 @@ sobreService.service('UserService', [ '$q', '$http',function($q,$http) {
    
            parameters.auth = auth;
            delete parameters.password;
+            var req = {
+               method: 'POST',
+                 url: sub_url,
+                 headers: {
+                   'Content-Type': 'application/x-www-form-urlencoded'
+                 },
+                 data: parameters,
+                parameters: parameters 
+                };
 
-           $http.post(sub_url,parameters)
+           $http.post(sub_url,req)
             .success(function(response){
                 console.log(response);
                 if(response.status === 'ERROR'){
