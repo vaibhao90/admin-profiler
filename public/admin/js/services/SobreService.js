@@ -50,7 +50,7 @@ sobreService.service('LoginService', [ '$q', '$http',function($q,$http) {
          //    }
        
          //   var url = src+sub_url+"?"+queryString;
-           $http.post(sub_url,req)
+           $http(req)
             .success(function(response){
                 console.log(response);
                 if(response.status === 'ERROR'){

@@ -10,7 +10,7 @@ module.exports = function(app) {
 
 	// frontend routes =========================================================
 	// route to handle all angular requests
- 
+/* 
 
 	//app.get('/be/user/login', function(req, res) {
 	app.post('/be/user/login', function(req, res) {	
@@ -19,7 +19,7 @@ module.exports = function(app) {
         //console.log(req);
 		var client = new Client();
          var result = {};
-        console.log(req.body);
+       // console.log(req.body);
 		// set content-type header and data as json in args parameter
 		// var args = {
 		//   data: req.body,
@@ -32,7 +32,7 @@ module.exports = function(app) {
         // if(req.query.password)  parameters = parameters+"&password="+req.query.password; 
        // console.log(args);
 		client.post("http://sobre.volsted.com/be/user/login",req.body, function(data,response) {
-	//console.log(req.body);		
+	console.log(response);		
 	 	//client.get("http://sobre.volsted.com/be/user/login",args, function(data,response) {	
 		      // parsed response body as js object
 		   //console.log(response);
@@ -46,7 +46,7 @@ module.exports = function(app) {
 
     app.get('/be/user/list', function(req, res) {
 		var Client = require('node-rest-client').Client;
-        console.log(req);
+       // console.log(req);
 		var client = new Client();
          var result = {};
          var args = {
@@ -57,11 +57,11 @@ module.exports = function(app) {
           var pageSize = req.query.pageSize || 10;
 		client.get("http://sobre.volsted.com/be/user/list?auth="+req.query.auth+"&page="+page+"&pageSize="+pageSize, args, function(data,response) {
 		      // parsed response body as js object
-		    console.log(data);
+		//    console.log(data);
 		    result = data;
 		    res.json(data);
 		    // raw response
-		    console.log(response);
+		  //  console.log(response);
 		}); 
 	});	    
 
@@ -121,10 +121,34 @@ module.exports = function(app) {
 
  
 
+*/
+      app.get('/be/*',function(req,res) {
+		  //modify the url in any way you want
+                      
+  			var newurl = 'http://sobre.volsted.com/be/';
+ 			 request(newurl).pipe(res);
+			});
+      app.post('/be/*',function(req,res) {
+var url = 'http://sobre.volsted.com/be/'+ req.url;
+  var r = null;
+  if(req.method === 'POST') {
+     r = request.post({uri: url, json: req.body});
+  } else {
+     r = request(url);
+  }
+
+  req.pipe(r).pipe(res);
+//		 console.log(req.url);
+                  //modify the url in any way you want
+  //                      var newurl = 'http://sobre.volsted.com/'+req.url;
+//                         request(newurl).pipe(res);
+                        });
+
 
 
 	app.get('/admin', function(req, res) {
 		res.sendfile('./public/index.html');
 	});
+
 
 };
